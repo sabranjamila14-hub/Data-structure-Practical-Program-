@@ -1,0 +1,20 @@
+class Solution:
+    def findTriplets(self, arr):  # renamed to match driver
+        n = len(arr)
+        arr.sort()
+        
+        for i in range(n-2):
+            left = i + 1
+            right = n - 1
+            
+            while left < right:
+                s = arr[i] + arr[left] + arr[right]
+                
+                if s == 0:
+                    return True
+                elif s < 0:
+                    left += 1
+                else:
+                    right -= 1
+        
+        return False
