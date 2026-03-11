@@ -1,0 +1,29 @@
+class Solution:
+    
+    def find(self, parent, x):
+        if parent[x] == x:
+            return x
+        parent[x] = self.find(parent, parent[x])
+        return parent[x]
+    
+    def jobSequencing(self, deadline, profit):
+        n = len(deadline)
+        
+        jobs = list(zip(deadline, profit))
+        jobs.sort(key=lambda x: x[1], reverse=True)
+        
+        max_deadline = max(deadline)
+        parent = [i for i in range(max_deadline + 1)]
+        
+        count = 0
+        total_profit = 0
+        
+        for d, p in jobs:
+            slot = self.find(parent, d)
+            
+            if slot > 0:
+                parent[slot] = self.find(parent, slot - 1)
+                count += 1
+                total_profit += p
+        
+        return [count, total_profit]
