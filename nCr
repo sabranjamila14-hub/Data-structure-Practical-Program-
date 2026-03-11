@@ -1,0 +1,14 @@
+class Solution:
+    def nCr(self, n, r):
+        # If r > n, nCr = 0
+        if r > n:
+            return 0
+        
+        # nCr = nC(n-r) because C(n, r) == C(n, n-r)
+        r = min(r, n - r)
+        
+        result = 1
+        for i in range(r):
+            result = result * (n - i) // (i + 1)
+        
+        return result
