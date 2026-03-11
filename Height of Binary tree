@@ -1,0 +1,9 @@
+class Solution:
+    def height(self, root):
+        if not root:
+            return -1  # empty tree has -1 edges
+        
+        left_height = self.height(root.left)
+        right_height = self.height(root.right)
+        
+        return 1 + max(left_height, right_height)
