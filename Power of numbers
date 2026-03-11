@@ -1,0 +1,7 @@
+class Solution:
+    def reverseexponentiation(self, n):
+        # reverse the number
+        rev = int(str(n)[::-1])
+        
+        # return n raised to the power of reversed number
+        return n ** rev
