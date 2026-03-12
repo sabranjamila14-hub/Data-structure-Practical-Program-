@@ -1,0 +1,21 @@
+# Definition for a binary tree node.
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class Solution:
+    def isIdentical(self, r1: Node, r2: Node) -> bool:
+        # Both nodes are None
+        if not r1 and not r2:
+            return True
+        
+        # One is None, the other is not
+        if not r1 or not r2:
+            return False
+        
+        # Check current node and recursively check left & right
+        return (r1.data == r2.data and 
+                self.isIdentical(r1.left, r2.left) and 
+                self.isIdentical(r1.right, r2.right))
