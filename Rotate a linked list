@@ -1,0 +1,36 @@
+# Definition for singly-linked list node
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Solution:
+    def rotate(self, head, k):
+        if not head or not head.next or k == 0:
+            return head
+        
+        # Step 1: Count length of linked list
+        length = 1
+        tail = head
+        while tail.next:
+            tail = tail.next
+            length += 1
+        
+        # Step 2: Normalize k
+        k = k % length
+        if k == 0:
+            return head
+        
+        # Step 3: Traverse to kth node
+        current = head
+        count = 1
+        while count < k and current:
+            current = current.next
+            count += 1
+        
+        # current is now kth node
+        new_head = current.next
+        current.next = None  # Break the link
+        tail.next = head     # Connect old tail to old head
+        
+        return new_head
