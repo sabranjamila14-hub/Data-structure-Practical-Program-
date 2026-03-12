@@ -1,0 +1,35 @@
+class Solution:
+    def find(self, arr, x):
+        n = len(arr)
+        
+        # Helper for first occurrence
+        def first_occurrence():
+            low, high = 0, n - 1
+            res = -1
+            while low <= high:
+                mid = (low + high) // 2
+                if arr[mid] == x:
+                    res = mid
+                    high = mid - 1
+                elif arr[mid] < x:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+            return res
+
+        # Helper for last occurrence
+        def last_occurrence():
+            low, high = 0, n - 1
+            res = -1
+            while low <= high:
+                mid = (low + high) // 2
+                if arr[mid] == x:
+                    res = mid
+                    low = mid + 1
+                elif arr[mid] < x:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+            return res
+
+        return [first_occurrence(), last_occurrence()]
