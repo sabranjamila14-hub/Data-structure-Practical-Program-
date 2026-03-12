@@ -1,0 +1,27 @@
+from collections import deque
+
+class Solution:
+    def bottomView(self, root):
+        if not root:
+            return []
+        
+        # Dictionary to store the last node at each horizontal distance
+        hd_node = dict()
+        
+        # Queue stores tuples: (node, horizontal distance)
+        q = deque()
+        q.append((root, 0))
+        
+        while q:
+            node, hd = q.popleft()
+            
+            # Overwrite the node at this horizontal distance
+            hd_node[hd] = node.data
+            
+            if node.left:
+                q.append((node.left, hd - 1))
+            if node.right:
+                q.append((node.right, hd + 1))
+        
+        # Extract the nodes in order of HD from left to right
+        return [hd_node[hd] for hd in sorted(hd_node.keys())]
