@@ -1,0 +1,23 @@
+class Solution:
+    def findKRotation(self, arr):
+        n = len(arr)
+        low, high = 0, n - 1
+        
+        # If the array is not rotated at all
+        if arr[low] <= arr[high]:
+            return 0
+        
+        while low <= high:
+            mid = (low + high) // 2
+            next_idx = (mid + 1) % n
+            prev_idx = (mid - 1 + n) % n
+            
+            # Check if mid is the minimum element
+            if arr[mid] <= arr[next_idx] and arr[mid] <= arr[prev_idx]:
+                return mid
+            
+            # Decide which side to go
+            if arr[mid] <= arr[high]:
+                high = mid - 1
+            else:
+                low = mid + 1
