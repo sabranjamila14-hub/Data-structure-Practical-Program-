@@ -1,0 +1,16 @@
+class Solution:
+    def subArrayExists(self, arr):
+        # Use a set to store prefix sums
+        prefix_sums = set()
+        curr_sum = 0
+        
+        for num in arr:
+            curr_sum += num
+            
+            # If prefix sum is 0 or already seen, subarray with 0 sum exists
+            if curr_sum == 0 or curr_sum in prefix_sums or num == 0:
+                return True
+            
+            prefix_sums.add(curr_sum)
+        
+        return False
